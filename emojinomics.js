@@ -7,9 +7,17 @@ const magnitudes = ['', 'K', 'G', 'P'];
 
 const human = n => {
   let i = 0;
-  while (n > 1e3) {
-    n = (n / 1e3) | 0;
+  if (n < 1e3) {
+    return n;
+  }
+  do {
+    n = (n / 1e3);
     i++;
+  } while (n > 1e3);
+  if (n < 10) {
+    n = n.toFixed(2);
+  } else if (n < 100) {
+    n = n.toFixed(1);
   }
   return n + magnitudes[i];
 }
